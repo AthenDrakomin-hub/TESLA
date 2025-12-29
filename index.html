@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tesla Phone Concept - 未来已来</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/v4-shims.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'tesla-red': '#E82127',
+                        'tesla-black': '#000000',
+                        'tesla-silver': '#D8D8D8',
+                        'tesla-dark': '#111111',
+                        'tesla-gray': '#222222'
+                    },
+                    fontFamily: {
+                        'tesla': ['Inter', 'Helvetica Neue', 'Arial', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .text-shadow {
+                text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            }
+            .glass-effect {
+                backdrop-filter: blur(10px);
+                background: rgba(255, 255, 255, 0.1);
+            }
+            .parallax {
+                transform: translateZ(0);
+                will-change: transform;
+            }
+            .floating {
+                animation: floating 6s ease-in-out infinite;
+            }
+            @keyframes floating {
+                0%, 100% { transform: translateY(0px); }
+                50% { transform: translateY(-20px); }
+            }
+            .rotate-slow {
+                animation: rotate 20s linear infinite;
+            }
+            @keyframes rotate {
+                from { transform: rotateY(0deg); }
+                to { transform: rotateY(360deg); }
+            }
+            .glow {
+                box-shadow: 0 0 20px rgba(232, 33, 39, 0.5);
+            }
+            .gradient-bg {
+                background: linear-gradient(135deg, #000000 0%, #111111 50%, #222222 100%);
+            }
+        }
+    </style>
+</head>
+<body class="font-tesla bg-tesla-black text-white overflow-x-hidden">
+    <!-- 导航栏 -->
+    <nav class="fixed top-0 left-0 right-0 z-50 glass-effect border-b border-gray-800 transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <div class="text-tesla-red text-2xl font-bold">
+                        <i class="fa fa-car mr-2"></i>TESLA
+                    </div>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#home" class="text-white hover:text-tesla-red transition-colors duration-300">首页</a>
+                    <a href="#design" class="text-white hover:text-tesla-red transition-colors duration-300">设计</a>
+                    <a href="#features" class="text-white hover:text-tesla-red transition-colors duration-300">功能</a>
+                    <a href="#specs" class="text-white hover:text-tesla-red transition-colors duration-300">规格</a>
+                    <a href="#coming" class="text-white hover:text-tesla-red transition-colors duration-300">发布</a>
+                </div>
+                <div class="md:hidden">
+                    <button class="text-white hover:text-tesla-red" onclick="toggleMobileMenu()">
+                        <i class="fa fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- 移动端菜单 -->
+        <div class="md:hidden hidden" id="mobile-menu">
+            <div class="px-2 pt-2 pb-3 space-y-1 bg-tesla-dark">
+                <a href="#home" class="block px-3 py-2 text-white hover:text-tesla-red">首页</a>
+                <a href="#design" class="block px-3 py-2 text-white hover:text-tesla-red">设计</a>
+                <a href="#features" class="block px-3 py-2 text-white hover:text-tesla-red">功能</a>
+                <a href="#specs" class="block px-3 py-2 text-white hover:text-tesla-red">规格</a>
+                <a href="#coming" class="block px-3 py-2 text-white hover:text-tesla-red">发布</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 首页 -->
+    <section id="home" class="relative min-h-screen flex items-center justify-center overflow-hidden">
+        <!-- 背景视频 -->
+        <div class="absolute inset-0 z-0">
+            <video autoplay muted loop class="w-full h-full object-cover">
+                <source src="https://aka.doubaocdn.com/s/qmVZ1vl33S" type="video/mp4">
+            </video>
+            <div class="absolute inset-0 bg-black bg-opacity-50"></div>
+        </div>
+        
+        <!-- 主要内容 -->
+        <div class="relative z-10 text-center px-4 max-w-6xl mx-auto">
+            <h1 class="text-[clamp(2.5rem,8vw,5rem)] font-bold mb-6 text-shadow floating">
+                TESLA<br>
+                <span class="text-tesla-red">PHONE</span>
+            </h1>
+            <p class="text-[clamp(1rem,3vw,1.5rem)] mb-8 max-w-3xl mx-auto leading-relaxed">
+                这不是手机，是连接你与特斯拉生态的神经中枢。
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <button class="bg-tesla-red hover:bg-red-600 text-white px-8 py-4 rounded-md transition-all duration-300 transform hover:scale-105 glow">
+                    <i class="fa fa-rocket mr-2"></i>探索未来
+                </button>
+                <button class="bg-transparent border-2 border-white hover:border-tesla-red text-white hover:text-tesla-red px-8 py-4 rounded-md transition-all duration-300">
+                    <i class="fa fa-play mr-2"></i>观看视频
+                </button>
+            </div>
+        </div>
+        
+        <!-- 滚动指示器 -->
+        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+            <i class="fa fa-chevron-down text-2xl text-white"></i>
+        </div>
+    </section>
+
+    <!-- 设计与材质 -->
+    <section id="design" class="py-20 bg-gradient-to-b from-tesla-black to-tesla-dark">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-[clamp(2rem,5vw,3.5rem)] font-bold mb-6">设计与材质</h2>
+                <p class="text-[clamp(1rem,2vw,1.25rem)] text-gray-300 max-w-3xl mx-auto">
+                    每一个细节都经过精心设计，融合未来科技与可持续理念
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <!-- 手机3D模型 -->
+                <div class="relative">
+                    <div class="rotate-slow">
+                        <img src="https://aka.doubaocdn.com/s/KqXq1vl32h" alt="Tesla Phone Concept" class="w-full max-w-md mx-auto">
+                    </div>
+                    <!-- 3D控制器 -->
+                    <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
+                        <button class="bg-tesla-red text-white p-2 rounded-full hover:bg-red-600 transition-colors">
+                            <i class="fa fa-rotate-left"></i>
+                        </button>
+                        <button class="bg-tesla-gray text-white p-2 rounded-full hover:bg-gray-600 transition-colors">
+                            <i class="fa fa-plus"></i>
+                        </button>
+                        <button class="bg-tesla-gray text-white p-2 rounded-full hover:bg-gray-600 transition-colors">
+                            <i class="fa fa-minus"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- 设计特点 -->
+                <div class="space-y-8">
+                    <div class="bg-tesla-gray p-6 rounded-lg border border-gray-700">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 bg-tesla-red rounded-full flex items-center justify-center mr-4">
+                                <i class="fa fa-recycle text-xl"></i>
+                            </div>
+                            <h3 class="text-xl font-bold">可持续材料</h3>
+                        </div>
+                        <p class="text-gray-300">
+                            采用回收火箭合金外壳，既环保又具备超强耐用性，体现特斯拉对可持续发展的承诺。
+                        </p>
+                    </div>
+                    
+                    <div class="bg-tesla-gray p-6 rounded-lg border border-gray-700">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 bg-tesla-red rounded-full flex items-center justify-center mr-4">
+                                <i class="fa fa-cube text-xl"></i>
+                            </div>
+                            <h3 class="text-xl font-bold">一体化机身</h3>
+                        </div>
+                        <p class="text-gray-300">
+                            棱角分明的几何设计语言，延续Cybertruck的未来感，打造出独一无二的视觉识别。
+                        </p>
+                    </div>
+                    
+                    <div class="bg-tesla-gray p-6 rounded-lg border border-gray-700">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 bg-tesla-red rounded-full flex items-center justify-center mr-4">
+                                <i class="fa fa-sun-o text-xl"></i>
+                            </div>
+                            <h3 class="text-xl font-bold">太阳能充电背板</h3>
+                        </div>
+                        <p class="text-gray-300">
+                            创新的太阳能充电技术，即使在户外也能为手机充电，实现真正的无限续航可能。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 颠覆性功能 -->
+    <section id="features" class="py-20 bg-tesla-dark relative overflow-hidden">
+        <!-- 背景装饰 -->
+        <div class="absolute inset-0 z-0">
+            <img src="https://aka.doubaocdn.com/s/uKyu1vl32j" alt="Space Background" class="w-full h-full object-cover opacity-20">
+        </div>
+        
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-[clamp(2rem,5vw,3.5rem)] font-bold mb-6">颠覆性功能</h2>
+                <p class="text-[clamp(1rem,2vw,1.25rem)] text-gray-300 max-w-3xl mx-auto">
+                    重新定义智能手机的可能性，连接整个特斯拉生态系统
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- 星链直连 -->
+                <div class="bg-tesla-gray border border-gray-700 rounded-lg overflow-hidden group hover:border-tesla-red transition-all duration-300 transform hover:scale-105">
+                    <div class="h-48 overflow-hidden">
+                        <img src="https://aka.doubaocdn.com/s/6ltU1vl32h" alt="Starlink Connection" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    </div>
+                    <div class="p-6">
+                        <div class="w-12 h-12 bg-tesla-red rounded-full flex items-center justify-center mb-4">
+                            <i class="fa fa-satellite text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3">星链直连</h3>
+                        <p class="text-gray-300 mb-4">
+                            内置星链接收器，在无信号地区也能实现全球无缝通信，真正的无边界连接。
+                        </p>
+                        <div class="flex items-center text-tesla-red">
+                            <span>了解更多</span>
+                            <i class="fa fa-arrow-right ml-2"></i>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 特斯拉生态控制 -->
+                <div class="bg-tesla-gray border border-gray-700 rounded-lg overflow-hidden group hover:border-tesla-red transition-all duration-300 transform hover:scale-105">
+                    <div class="h-48 overflow-hidden">
+                        <img src="https://aka.doubaocdn.com/s/6ltU1vl32h" alt="Tesla Ecosystem" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    </div>
+                    <div class="p-6">
+                        <div class="w-12 h-12 bg-tesla-red rounded-full flex items-center justify-center mb-4">
+                            <i class="fa fa-car text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3">特斯拉生态控制</h3>
+                        <p class="text-gray-300 mb-4">
+                            无缝控制你的特斯拉汽车、Powerwall能源墙和Optimus机器人，打造智能生活体验。
+                        </p>
+                        <div class="flex items-center text-tesla-red">
+                            <span>了解更多</span>
+                            <i class="fa fa-arrow-right ml-2"></i>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Mars模式 -->
+                <div class="bg-tesla-gray border border-gray-700 rounded-lg overflow-hidden group hover:border-tesla-red transition-all duration-300 transform hover:scale-105">
+                    <div class="h-48 overflow-hidden">
+                        <img src="https://aka.doubaocdn.com/s/uKyu1vl32j" alt="Mars Mode" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    </div>
+                    <div class="p-6">
+                        <div class="w-12 h-12 bg-tesla-red rounded-full flex items-center justify-center mb-4">
+                            <i class="fa fa-moon-o text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3">Mars模式</h3>
+                        <p class="text-gray-300 mb-4">
+                            为极端环境设计的增强通信套件，支持未来火星殖民的特殊通信需求。
+                        </p>
+                        <div class="flex items-center text-tesla-red">
+                            <span>了解更多</span>
+                            <i class="fa fa-arrow-right ml-2"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 功能演示视频 -->
+            <div class="mt-16 bg-tesla-gray border border-gray-700 rounded-lg overflow-hidden">
+                <div class="aspect-w-16 aspect-h-9">
+                    <video controls class="w-full">
+                        <source src="https://aka.doubaocdn.com/s/qmVZ1vl33S" type="video/mp4">
+                    </video>
+                </div>
+                <div class="p-6 text-center">
+                    <h3 class="text-xl font-bold mb-2">功能演示</h3>
+                    <p class="text-gray-300">观看特斯拉概念手机的完整功能演示</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 技术规格 -->
+    <section id="specs" class="py-20 bg-gradient-to-b from-tesla-dark to-tesla-black">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-[clamp(2rem,5vw,3.5rem)] font-bold mb-6">技术规格</h2>
+                <p class="text-[clamp(1rem,2vw,1.25rem)] text-gray-300 max-w-3xl mx-auto">
+                    突破性的技术参数，重新定义智能手机性能标准
+                </p>
+            </div>
+            
+            <!-- 规格对比表格 -->
+            <div class="overflow-x-auto">
+                <table class="w-full border-collapse">
+                    <thead>
+                        <tr class="bg-tesla-red">
+                            <th class="py-4 px-6 text-left">特性</th>
+                            <th class="py-4 px-6 text-left">Tesla Phone Concept</th>
+                            <th class="py-4 px-6 text-left">传统旗舰手机</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="border-b border-gray-700 hover:bg-tesla-gray transition-colors">
+                            <td class="py-4 px-6 font-medium">处理器</td>
+                            <td class="py-4 px-6">Tesla Neural Chip</td>
+                            <td class="py-4 px-6 text-gray-400">传统移动处理器</td>
+                        </tr>
+                        <tr class="border-b border-gray-700 hover:bg-tesla-gray transition-colors">
+                            <td class="py-4 px-6 font-medium">显示屏</td>
+                            <td class="py-4 px-6">全息感应屏，6.8英寸</td>
+                            <td class="py-4 px-6 text-gray-400">OLED显示屏</td>
+                        </tr>
+                        <tr class="border-b border-gray-700 hover:bg-tesla-gray transition-colors">
+                            <td class="py-4 px-6 font-medium">电池</td>
+                            <td class="py-4 px-6">无限续航架构</td>
+                            <td class="py-4 px-6 text-gray-400">有限电池容量</td>
+                        </tr>
+                        <tr class="border-b border-gray-700 hover:bg-tesla-gray transition-colors">
+                            <td class="py-4 px-6 font-medium">连接</td>
+                            <td class="py-4 px-6">星链直连 + 5G</td>
+                            <td class="py-4 px-6 text-gray-400">5G</td>
+                        </tr>
+                        <tr class="border-b border-gray-700 hover:bg-tesla-gray transition-colors">
+                            <td class="py-4 px-6 font-medium">材质</td>
+                            <td class="py-4 px-6">回收火箭合金</td>
+                            <td class="py-4 px-6 text-gray-400">铝合金/玻璃</td>
+                        </tr>
+                        <tr class="border-b border-gray-700 hover:bg-tesla-gray transition-colors">
+                            <td class="py-4 px-6 font-medium">充电</td>
+                            <td class="py-4 px-6">太阳能 + 无线</td>
+                            <td class="py-4 px-6 text-gray-400">有线快充</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <!-- 性能图表 -->
+            <div class="mt-16 grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-tesla-gray border border-gray-700 rounded-lg p-6">
+                    <h3 class="text-xl font-bold mb-4">性能对比</h3>
+                    <canvas id="performanceChart" class="w-full"></canvas>
+                </div>
+                <div class="bg-tesla-gray border border-gray-700 rounded-lg p-6">
+                    <h3 class="text-xl font-bold mb-4">续航对比</h3>
+                    <canvas id="batteryChart" class="w-full"></canvas>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 发布预告 -->
+    <section id="coming" class="py-20 bg-tesla-black relative overflow-hidden">
+        <!-- 背景 -->
+        <div class="absolute inset-0 z-0">
+            <img src="https://aka.doubaocdn.com/s/uKyu1vl32j" alt="Space Background" class="w-full h-full object-cover opacity-20">
+        </div>
+        
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="text-center mb-12">
+                <h2 class="text-[clamp(2rem,5vw,3.5rem)] font-bold mb-6">敬请期待</h2>
+                <p class="text-[clamp(1rem,2vw,1.25rem)] text-gray-300 max-w-3xl mx-auto">
+                    特斯拉概念手机即将改变一切
+                </p>
+            </div>
+            
+            <!-- 倒计时 -->
+            <div class="bg-tesla-gray border border-gray-700 rounded-lg p-8 max-w-2xl mx-auto mb-12">
+                <h3 class="text-2xl font-bold mb-6">发布倒计时</h3>
+                <div class="grid grid-cols-4 gap-4 mb-6">
+                    <div class="bg-tesla-red rounded-lg p-4">
+                        <div class="text-3xl font-bold" id="days">00</div>
+                        <div class="text-sm text-gray-300">天</div>
+                    </div>
+                    <div class="bg-tesla-red rounded-lg p-4">
+                        <div class="text-3xl font-bold" id="hours">00</div>
+                        <div class="text-sm text-gray-300">时</div>
+                    </div>
+                    <div class="bg-tesla-red rounded-lg p-4">
+                        <div class="text-3xl font-bold" id="minutes">00</div>
+                        <div class="text-sm text-gray-300">分</div>
+                    </div>
+                    <div class="bg-tesla-red rounded-lg p-4">
+                        <div class="text-3xl font-bold" id="seconds">00</div>
+                        <div class="text-sm text-gray-300">秒</div>
+                    </div>
+                </div>
+                <p class="text-gray-300">即将揭开未来的面纱</p>
+            </div>
+            
+            <!-- 邮箱订阅 -->
+            <div class="bg-tesla-gray border border-gray-700 rounded-lg p-8 max-w-2xl mx-auto mb-12">
+                <h3 class="text-xl font-bold mb-4">获取最新消息</h3>
+                <p class="text-gray-300 mb-6">订阅我们的邮件列表，第一时间获取发布信息</p>
+                <form class="flex flex-col sm:flex-row gap-4">
+                    <input type="email" placeholder="您的邮箱地址" class="flex-1 px-4 py-3 bg-tesla-black border border-gray-600 rounded-md focus:outline-none focus:border-tesla-red text-white">
+                    <button type="submit" class="bg-tesla-red hover:bg-red-600 text-white px-6 py-3 rounded-md transition-colors">
+                        订阅
+                    </button>
+                </form>
+            </div>
+            
+            <!-- AR彩蛋提示 -->
+            <div class="bg-gradient-to-r from-tesla-red to-red-600 rounded-lg p-8 max-w-2xl mx-auto">
+                <div class="flex items-center justify-center mb-4">
+                    <i class="fa fa-mobile text-4xl mr-4"></i>
+                    <h3 class="text-xl font-bold">AR彩蛋</h3>
+                </div>
+                <p class="text-white mb-4">
+                    用手机扫描下方的特斯拉Logo，即可看到手机的AR模型
+                </p>
+                <div class="w-32 h-32 mx-auto bg-white rounded-lg flex items-center justify-center">
+                    <div class="text-tesla-red text-4xl font-bold">T</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer class="bg-tesla-black border-t border-gray-800 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <div class="text-tesla-red text-2xl font-bold mb-4">
+                        <i class="fa fa-car mr-2"></i>TESLA
+                    </div>
+                    <p class="text-gray-400 mb-4">
+                        推动世界向可持续能源转型
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-tesla-red transition-colors">
+                            <i class="fa fa-twitter text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-tesla-red transition-colors">
+                            <i class="fa fa-facebook text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-tesla-red transition-colors">
+                            <i class="fa fa-instagram text-xl"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-white font-bold mb-4">产品</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-tesla-red transition-colors">Model S</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-tesla-red transition-colors">Model 3</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-tesla-red transition-colors">Model X</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-tesla-red transition-colors">Model Y</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-tesla-red transition-colors">Cybertruck</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-white font-bold mb-4">服务</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-tesla-red transition-colors">充电网络</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-tesla-red transition-colors">太阳能</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-tesla-red transition-colors">Powerwall</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-tesla-red transition-colors">服务中心</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-tesla-red transition-colors">支持</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-white font-bold mb-4">公司</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-tesla-red transition-colors">关于我们</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-tesla-red transition-colors">新闻</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-tesla-red transition-colors">招聘</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-tesla-red transition-colors">投资者关系</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-tesla-red transition-colors">联系我们</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- 免责声明 -->
+            <div class="border-t border-gray-800 pt-8 text-center">
+                <p class="text-gray-400 text-sm mb-4">
+                    本网站为概念设计作品，旨在探索未来科技可能性。特斯拉手机并非特斯拉公司现有或已宣布的产品。
+                </p>
+                <p class="text-gray-500 text-xs">
+                    © 2025 Tesla Concept Phone. 本网站仅用于展示概念设计，不代表特斯拉公司官方立场。
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // 移动端菜单切换
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        // 导航栏滚动效果
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 100) {
+                navbar.classList.add('bg-tesla-black');
+                navbar.classList.remove('glass-effect');
+            } else {
+                navbar.classList.remove('bg-tesla-black');
+                navbar.classList.add('glass-effect');
+            }
+        });
+
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // 倒计时功能
+        function updateCountdown() {
+            const releaseDate = new Date('2026-01-01T00:00:00');
+            const now = new Date();
+            const diff = releaseDate - now;
+
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+            document.getElementById('days').textContent = days.toString().padStart(2, '0');
+            document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+            document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+            document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+        }
+
+        // 初始化倒计时
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+
+        // 图表初始化
+        window.addEventListener('load', function() {
+            // 性能对比图表
+            const performanceCtx = document.getElementById('performanceChart').getContext('2d');
+            new Chart(performanceCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['处理速度', 'AI性能', '图形处理', '连接速度'],
+                    datasets: [{
+                        label: 'Tesla Phone Concept',
+                        data: [95, 98, 92, 99],
+                        backgroundColor: '#E82127',
+                        borderColor: '#E82127',
+                        borderWidth: 1
+                    }, {
+                        label: '传统旗舰手机',
+                        data: [75, 65, 80, 70],
+                        backgroundColor: '#444444',
+                        borderColor: '#444444',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 100,
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.1)'
+                            },
+                            ticks: {
+                                color: 'white'
+                            }
+                        },
+                        x: {
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.1)'
+                            },
+                            ticks: {
+                                color: 'white'
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            labels: {
+                                color: 'white'
+                            }
+                        }
+                    }
+                }
+            });
+
+            // 续航对比图表
+            const batteryCtx = document.getElementById('batteryChart').getContext('2d');
+            new Chart(batteryCtx, {
+                type: 'line',
+                data: {
+                    labels: ['1小时', '3小时', '6小时', '12小时', '24小时'],
+                    datasets: [{
+                        label: 'Tesla Phone Concept',
+                        data: [100, 95, 90, 85, 80],
+                        borderColor: '#E82127',
+                        backgroundColor: 'rgba(232, 33, 39, 0.1)',
+                        fill: true,
+                        tension: 0.4
+                    }, {
+                        label: '传统旗舰手机',
+                        data: [100, 70, 40, 20, 5],
+                        borderColor: '#444444',
+                        backgroundColor: 'rgba(68, 68, 68, 0.1)',
+                        fill: true,
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 100,
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.1)'
+                            },
+                            ticks: {
+                                color: 'white',
+                                callback: function(value) {
+                                    return value + '%';
+                                }
+                            }
+                        },
+                        x: {
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.1)'
+                            },
+                            ticks: {
+                                color: 'white'
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            labels: {
+                                color: 'white'
+                            }
+                        }
+                    }
+                }
+            });
+        });
+
+        // 视差滚动效果
+        window.addEventListener('scroll', function() {
+            const scrolled = window.pageYOffset;
+            const parallaxElements = document.querySelectorAll('.parallax');
+            
+            parallaxElements.forEach(element => {
+                const speed = 0.5;
+                element.style.transform = `translateY(${scrolled * speed}px)`;
+            });
+        });
+
+        // 3D模型控制
+        document.addEventListener('DOMContentLoaded', function() {
+            const rotateBtn = document.querySelector('.fa-rotate-left').parentElement;
+            const model = document.querySelector('.rotate-slow');
+            
+            if (rotateBtn && model) {
+                let isRotating = true;
+                
+                rotateBtn.addEventListener('click', function() {
+                    isRotating = !isRotating;
+                    if (isRotating) {
+                        model.classList.add('rotate-slow');
+                    } else {
+                        model.classList.remove('rotate-slow');
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>
